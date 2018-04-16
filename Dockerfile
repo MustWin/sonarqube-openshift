@@ -3,8 +3,10 @@ FROM sonarqube:lts
 LABEL maintainer="John Weldon <johnweldon4@gmail.com>" \
       company="MustWin, LLC"
 
-USER sonarqube
+ADD run.sh ${SONARQUBE_HOME}/bin/run.sh
 
-ADD run.sh /opt/sonarqube/bin/run.sh
+RUN chown -R sonarqube:sonarqube ${SONARQUBE_HOME}
+
+USER sonarqube
 
 ENTRYPOINT ["./bin/run.sh"]

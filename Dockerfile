@@ -5,8 +5,9 @@ LABEL maintainer="John Weldon <johnweldon4@gmail.com>" \
 
 ADD run.sh ${SONARQUBE_HOME}/bin/run.sh
 
-RUN chown -R sonarqube:sonarqube ${SONARQUBE_HOME}
+RUN chown -R sonarqube:sonarqube ${SONARQUBE_HOME} && \
+    chmod -R g=u ${SONARQUBE_HOME}
 
-USER sonarqube
+USER sonarqube:sonarqube
 
 ENTRYPOINT ["./bin/run.sh"]
